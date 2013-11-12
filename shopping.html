@@ -1,0 +1,32 @@
+<html ng-app='shop'>
+<head>
+	<title>Your Shopping Cart</title>
+</head>
+<body ng-controller='CartController'>
+	<h1>Your Order</h1>
+	<div>
+		<table width="500">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th>Total</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody ng-repeat='item in items'>
+				<td>{{$index}}</td>
+				<td>{{item.title}}</td>
+				<td><input ng-model='item.quantity' size="5"></td>
+				<td>{{item.price | currency}}</td>
+				<td>{{item.price * item.quantity | currency}}</td>
+				<td><button ng-click="remove($index)">X</button></td>
+			</tbody>
+		</table>
+	</div>
+	<script src="js/angular.js"></script>
+	<script src="js/shop.js"></script>
+</body>
+</html>
