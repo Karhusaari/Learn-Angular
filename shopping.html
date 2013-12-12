@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html ng-app='shop'>
+<html lang="en" ng-app='shop'>
 <head>
 	<title>Your Shopping Cart</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">	
 </head>
-<body ng-controller='CartController'>
-	<h1>Your Order {{header}}</h1>
-	<div>
-		<table width="500">
+<body ng-controller='CartController' class="container">
+	<h1 class="page-header">Your Shopping Cart: {{ getQuantity() + header }} </h1>
+	<div class="row">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -17,21 +18,41 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody ng-repeat='item in items'>
-				<td>{{$index}}</td>
-				<td>{{item.title | uppercase}}</td>
-				<td><input ng-model='item.quantity' size="5"></td>
-				<td>{{item.price | currency}}</td>
-				<td>{{item.price * item.quantity | currency}}</td>
-				<td><button ng-click="remove($index)">X</button></td>
+			<tbody>
+				<tr ng-repeat='item in items'>
+					<td>{{$index}}</td>
+					<td>{{item.title | uppercase}}</td>
+					<td><input ng-model='item.quantity' size="5"></td>
+					<td>{{item.price | currency}}</td>
+					<td>{{item.price * item.quantity | currency}}</td>
+					<td><button class="btn" ng-click="remove($index)">X</button></td>
+				</tr>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td>Totals: </td>
+					<td>{{ getQuantity() }}</td>
+					<td></td>
+					<td></td>
+					<td><button class="btn btn-default" ng-click="removeAll()"><span class="glyphicon glyphicon-trash"></span> Remove All</button></td>
+				</tr>
+			</tfoot>
 		</table>
-		<button ng-click="removeAll()">Remove All</button>
+		<div class="">
+			
+		</div>
 		<p>{{someText + addText + " " + moreText}}</p>
-		<p><input ng-model="addText"></p>
-		<p>Are you awesome? <input type="checkbox" ng-model="awesome" ng-change="isAwesome()"></p>
+		<p><input ng-model="addText" ng-change="showAwesome()"></p>
+		<p id="aweCheck" class="">Are you awesome? <input type="checkbox" ng-model="awesome" ng-change="isAwesome()"></p>
 	</div>
 	<script src="js/angular.js"></script>
+	<script src="js/jquery-1.9.1.js"></script>
 	<script src="js/shop.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#aweCheck").hide();
+		});
+	</script>
 </body>
 </html>
