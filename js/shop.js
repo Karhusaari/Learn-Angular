@@ -62,6 +62,8 @@ shopModule.controller("CartController", function($scope) {
 		if( $scope.addText.length > 0){
 			$("#aweCheck").show();
 		}else{
+			$scope.moreText = "";
+			$scope.awesome = false;
 			$("#aweCheck").hide();
 		}
 	};
